@@ -1,7 +1,7 @@
 package cn.winsky.travel.airporttravel.utils
 
 import android.util.Log
-import cn.winsky.travel.airporttravel.BuildConfig
+import com.winsky.winto.base.BuildConfig
 
 /**
  * <br/>================================================

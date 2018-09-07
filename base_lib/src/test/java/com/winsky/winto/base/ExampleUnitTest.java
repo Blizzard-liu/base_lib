@@ -1,4 +1,4 @@
-package com.winsky.winto.base_lib;
+package com.winsky.winto.base;
 
 import org.junit.Test;
 

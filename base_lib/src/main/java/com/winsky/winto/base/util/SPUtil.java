@@ -1,4 +1,4 @@
-package com.winsky.winto.base_lib.util;
+package com.winsky.winto.base.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
 
-import com.winsky.winto.base_lib.BaseApp;
+import com.winsky.winto.base.BaseApp;
 
 import java.util.Collections;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.winsky.winto.base_lib.activity
+package com.winsky.winto.base.activity
 
 /**
  * <br/>================================================

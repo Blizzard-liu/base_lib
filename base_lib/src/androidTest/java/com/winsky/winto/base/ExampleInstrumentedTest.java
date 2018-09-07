@@ -1,4 +1,4 @@
-package com.winsky.winto.base_lib;
+package com.winsky.winto.base;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

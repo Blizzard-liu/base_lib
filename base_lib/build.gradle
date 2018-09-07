@@ -1,33 +1,44 @@
 apply plugin: 'com.android.library'
 
-android {
-    compileSdkVersion 28
+apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-android-extensions'
+
+def cfg = rootProject.ext.configuration
+def libs = rootProject.ext.libraries
+android {
+    compileSdkVersion cfg.compileSdkVersion
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion cfg.appMinSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
+    api"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    api "com.android.support:appcompat-v7:${libs.supportVersion}"
+    api "com.android.support:design:${libs.supportVersion}"
+    api "com.android.support:cardview-v7:${libs.supportVersion}"
+    api 'com.android.support.constraint:constraint-layout:1.1.3'
     // Anko Commons Kotlin辅助库
-    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    api "org.jetbrains.anko:anko-commons:$anko_version"
     //https://github.com/laobie/StatusBarUtil
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
+    api "com.android.support:multidex:${libs.multidex}"
+    //数据解析
+    api "com.google.code.gson:gson:${libs.gson}"
+    //权限管理
+    api "com.yanzhenjie:permission:${libs.permission}"
+    //下拉刷新
+    api "com.scwang.smartrefresh:SmartRefreshLayout:${libs.Refresh}"
+    //图片加载
+    implementation "com.github.bumptech.glide:glide:${libs.glide}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${libs.glide}"
 }

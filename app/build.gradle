@@ -4,31 +4,104 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def cfg = rootProject.ext.configuration
+def libs = rootProject.ext.libraries
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion cfg.compileSdkVersion
     defaultConfig {
-        applicationId "com.winsky.winto.baseapp"
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        applicationId cfg.applicationId
+        minSdkVersion cfg.appMinSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+        resConfigs "zh-rCN", "zh-rHK", "zh-rTW", "en"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        packagingOptions {
+            exclude 'META-INF/rxjava.properties'
+        }
+        multiDexEnabled true
     }
-    buildTypes {
+    repositories{
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file(STORE_FILE_PATH)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+            manifestPlaceholders = [
+                    APP_NAME      : "@string/app_name_debug",
+                    APPLICATION_ID: cfg.applicationId,
+                    MAP_KEY       : MAP_KEY
+            ]
+            //设置debug版本包含x86的so文件
+            ndk {
+                abiFilters "armeabi"
+            }
+        }
+//        release {
+//            // 混淆
+//            minifyEnabled true
+//            // Zipalign优化
+//            zipAlignEnabled true
+//            // 移除无用的resource文件
+//            shrinkResources true
+//            // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+////            signingConfig signingConfigs.release
+//            manifestPlaceholders = [
+//                    APP_NAME      : "@string/app_name",
+//                    APPLICATION_ID: cfg.applicationId,
+//                    MAP_KEY       : MAP_KEY
+//            ]
+//
+//            //设置release版本只包含armeabi和armeabi-v7a的so包
+//            ndk {
+//                abiFilters "armeabi"
+//            }
+//
+//        }
+
+    }
+
+    // 输出文件配置，渠道包是这种格式的：app-{版本号}-{渠道名称}.apk
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                // 输出文件夹所在的位置
+                variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apk/" + variant.buildType.name)
+
+                def fileName = "Demo_V${defaultConfig.versionName}_${buildTime()}_${variant.buildType.name}.apk"
+
+                outputFileName = fileName
+            }
         }
     }
 }
 
+static def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy-MM-dd HH-mm', TimeZone.getTimeZone("UTC"))
+    return formattedDate
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
-    implementation 'com.android.support:design:28.0.0-rc01'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(path: ':base_lib')
 }

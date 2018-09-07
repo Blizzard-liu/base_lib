@@ -1,4 +1,4 @@
-package com.winsky.winto.base_lib.util;
+package com.winsky.winto.base.util;
 
 import android.app.Activity;
 import android.app.Application;
