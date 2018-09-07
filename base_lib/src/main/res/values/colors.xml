@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF85D7AC</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#03BB59</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bgColor">#F7F7F7</color>
+    <color name="gray_color">#4b4b58</color>
+    <color name="refresh_bg_color">#F3F3F3</color>
+    <color name="gray_line">#F1F1F1</color>
+    <color name="btn_press_color">#FF145BC4</color>
+    <color name="tab_unselect">#c9c9c9</color>
+    <color name="text_dark_color">#FF202020</color>
+    <color name="FF4A4A4A">#FF4A4A4A</color>
+    <color name="FF9B9B9B">#FF9B9B9B</color>
+    <color name="divider_color">#f0f0f0</color>
+    <color name="activity_bg">#F8F8F8</color>
+    <color name="text_green_color">#FF3AC57E</color>
+    <!--点击颜色-->
+    <color name="bgColor_button_press">#EAEAEA</color>
+    <color name="gray_bg">#f8f8f8</color>
+    <color name="gray_bg_f1">#f1f1f1</color>
+    <color name="dark_color">#FF000000</color>
+    <color name="orange_color">#ff9725</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#da3e25</color>
+    <color name="yellow">#ffcc00</color>
+    <color name="green">#56D07D</color>
+
+</resources>
