@@ -44,6 +44,7 @@ ext {
             sqlcipher                       : "3.5.9",
             multidex                        : "1.0.3",
             leakcanary                      : "1.5.4",
+            versionchecklib                 : "2.0.8",
             PictureSelector                 : "v2.2.3",
             EasySwipeMenuLayout             : "1.1.2",
 

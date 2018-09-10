@@ -42,4 +42,6 @@ dependencies {
     //图片加载
     implementation "com.github.bumptech.glide:glide:${libs.glide}"
     annotationProcessor "com.github.bumptech.glide:compiler:${libs.glide}"
+    //版本检测升级（更新）库(包含Eventbus) https://github.com/AlexLiuSheng/CheckVersionLib
+    api "com.allenliu.versionchecklib:library:${libs.versionchecklib}"
 }
