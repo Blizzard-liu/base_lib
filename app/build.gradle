@@ -22,7 +22,7 @@ android {
         }
 
     }
-    repositories{
+    repositories {
         flatDir {
             dirs 'libs'
         }
@@ -104,4 +104,5 @@ static def buildTime() {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':base_lib')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

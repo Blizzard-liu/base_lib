@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.winsky.winto.base.util.Density
+import com.winsky.winto.base.util.Utils
 import com.winsky.winto.base.widget.refreshheader.MaterialHeader
 import org.jetbrains.anko.doAsync
 import kotlin.properties.Delegates
@@ -59,7 +60,7 @@ class BaseApp: Application(){
         super.onCreate()
         instance = this
         Density.setDensity(this)
-
+        Utils.init(this)
         doAsync {
             //子线程初始化
 
