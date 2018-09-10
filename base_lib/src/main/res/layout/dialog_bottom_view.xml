@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:background="@drawable/shape_dialog_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                tools:text="是否确认删除该地址？"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:textColor="@color/FF4A4A4A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:background="@drawable/selector_press_btn_color"
+                tools:text="删除"
+                android:id="@+id/tv_message"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="16sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:background="@drawable/selector_press_btn_color"
+                tools:text="删除"
+                android:id="@+id/tv_second_message"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:textColor="@color/FF4A4A4A"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_dialog_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_cancel"
+                tools:text="取消"
+                android:text="取消"
+                android:background="@drawable/selector_press_btn_color"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:textColor="@color/FF9B9B9B"
+                android:textSize="16sp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">base_lib</string>
+    <string name="str_cancel">取消</string>
+    <string name="str_confirm">确定</string>
 </resources>

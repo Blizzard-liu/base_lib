@@ -245,12 +245,6 @@
    -keep class com.autonavi.aps.amapapi.model.**{*;}
 
 
-# Glide
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-    **[] $VALUES;
-    public *;
-}
 # nineoldandroids
 -keep interface com.nineoldandroids.view.** { *; }
 -dontwarn com.nineoldandroids.**
@@ -323,11 +317,3 @@
 #
 #}
 
-
-########################### CheckVersionLib  eventbus  #############################
- -keepattributes Annotation
-   -keepclassmembers class * {    @org.greenrobot.eventbus.Subscribe ;}
-   -keep enum org.greenrobot.eventbus.ThreadMode { *; }
-   -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {    (java.lang.Throwable);}
-   -keep class com.allenliu.versionchecklib.**{*;}
-########################### CheckVersionLib    eventbus #############################

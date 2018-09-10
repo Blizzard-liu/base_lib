@@ -35,13 +35,15 @@ dependencies {
     api "com.android.support:multidex:${libs.multidex}"
     //数据解析
     api "com.google.code.gson:gson:${libs.gson}"
-    //权限管理
+    //权限管理 https://github.com/yanzhenjie/AndPermission
     api "com.yanzhenjie:permission:${libs.permission}"
-    //下拉刷新
+    //下拉刷新 https://github.com/scwang90/SmartRefreshLayout
     api "com.scwang.smartrefresh:SmartRefreshLayout:${libs.Refresh}"
     //图片加载
     implementation "com.github.bumptech.glide:glide:${libs.glide}"
     annotationProcessor "com.github.bumptech.glide:compiler:${libs.glide}"
     //版本检测升级（更新）库(包含Eventbus) https://github.com/AlexLiuSheng/CheckVersionLib
     api "com.allenliu.versionchecklib:library:${libs.versionchecklib}"
+    //RecyclerViewAdapterHelper https://www.jianshu.com/p/b343fcff51b0
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${libs.BaseRecyclerViewAdapterHelper}"
 }
