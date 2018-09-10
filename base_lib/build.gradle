@@ -46,4 +46,9 @@ dependencies {
     api "com.allenliu.versionchecklib:library:${libs.versionchecklib}"
     //RecyclerViewAdapterHelper https://www.jianshu.com/p/b343fcff51b0
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${libs.BaseRecyclerViewAdapterHelper}"
+    //动画效果
+    implementation "com.facebook.rebound:rebound:${libs.rebound}"
+    implementation "com.nineoldandroids:library:${libs.nineoldandroids}"
+    //指示器
+    implementation 'com.flyco.pageindicator:FlycoPageIndicator_Lib:1.0.0@aar'
 }

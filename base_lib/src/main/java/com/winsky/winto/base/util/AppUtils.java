@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -202,4 +204,47 @@ public class AppUtils {
         }
         return flag;
     }
+
+    /** 显示软键盘 */
+    public static void showInputMethod(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    /** 显示软键盘 */
+    public static void showInputMethod(Context context) {
+        InputMethodManager imm = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    /** 多少时间后显示软键盘 */
+    public static void showInputMethod(final View view, long delayMillis) {
+        if (view==null)return;
+        // 显示输入法
+        view.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                AppUtils.showInputMethod(view);
+            }
+        }, delayMillis);
+    }
+
+    /**
+     * 获取屏幕高度(px)
+     */
+    public static int getScreenHeight(Context context) {
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
+    /**
+     * 获取屏幕宽度(px)
+     */
+    public static int getScreenWidth(Context context) {
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
+
 }
