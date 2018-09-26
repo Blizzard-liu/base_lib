@@ -11,6 +11,7 @@ import android.widget.RelativeLayout
 import cn.winsky.travel.airporttravel.utils.LogUtils
 import cn.winsky.travel.airporttravel.view.dialog.LoadingDialog
 import com.jaeger.library.StatusBarUtil
+import com.r0adkll.slidr.Slidr
 import com.winsky.winto.base.R
 import com.winsky.winto.base.util.Density
 import kotlinx.android.synthetic.main.activity_base.*
@@ -37,7 +38,9 @@ abstract class BaseActivity : AppCompatActivity() {
         sub_Activity = javaClass.simpleName
         LogUtils.w(TAG, "$sub_Activity=========================== onCreate ")
         setOrientation()
+        setTheme(R.style.SlidrActivity) //滑动返回必须设置背景透明
         setContentView(R.layout.activity_base)
+        setSwipeBack()
         setStatusBar()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT   //设置禁止横屏
 
@@ -58,6 +61,39 @@ abstract class BaseActivity : AppCompatActivity() {
         initListener(savedInstanceState)
 
     }
+
+    /**
+     * 设置界面滑动返回
+     */
+    private fun setSwipeBack() {
+//        val config =  SlidrConfig.Builder()
+//                        .primaryColor(getColorCompat(R.color.colorPrimary))
+////                .secondaryColor(getResources().getColor(R.color.secondary)
+//                        .position(SlidrPosition.LEFT)
+//                        .sensitivity(1f)
+//                        .scrimColor(Color.BLACK)
+//                        .scrimStartAlpha(0.8f)
+//                        .scrimEndAlpha(0f)
+////                        .velocityThreshold(2400f)
+////                        .distanceThreshold(0.25f)
+////                        .edge(true)
+////                        .edgeSize(0.18f) // The % of the screen that counts as the edge, default 18%
+//                        .build()
+//
+//         slidrInterface = Slidr.attach(this, config)
+
+        if (enableSwipeBack()) {
+            Slidr.attach(this)
+        }
+    }
+
+    /**
+     * 开启关闭界面滑动返回  默认开启
+     */
+    protected open fun enableSwipeBack(): Boolean {
+        return true
+    }
+
 
     /**
      * 打开消息监听

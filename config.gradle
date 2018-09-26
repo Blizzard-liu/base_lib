@@ -47,6 +47,7 @@ ext {
             versionchecklib                 : "2.0.8",
             PictureSelector                 : "v2.2.3",
             EasySwipeMenuLayout             : "1.1.2",
+            slidableactivity                : "2.0.6",
 
 
     ]
