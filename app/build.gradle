@@ -6,6 +6,12 @@ apply plugin: 'kotlin-android-extensions'
 
 def cfg = rootProject.ext.configuration
 def libs = rootProject.ext.libraries
+//https正式服务器的接口
+def API_RELEASE_HOST = "\"https://app.win-sky.com.cn:9001\""
+//阿里测试服务器的接口
+def API_BETA_HOST = "\"http://wp.win-sky.com.cn:16903\""
+//合肥测试服务器对外的接口
+def API_DEBUG_HOST = "\"http://hefei.win-sky.com.cn:2180\""
 
 android {
     compileSdkVersion cfg.compileSdkVersion
@@ -20,6 +26,13 @@ android {
         packagingOptions {
             exclude 'META-INF/rxjava.properties'
         }
+
+        //是否输出日志
+        buildConfigField "boolean", "LOG_DEBUG", "true"
+        buildConfigField "String", "ServerName", '"内部云服务器"'
+        buildConfigField "String", "API_HOST", "${API_DEBUG_HOST}"
+        //必须要保证所有的flavor 都属于同一个维度
+        flavorDimensions "default"
 
     }
     repositories {
@@ -40,6 +53,7 @@ android {
 
     buildTypes {
         debug {
+
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
@@ -53,30 +67,61 @@ android {
                 abiFilters "armeabi"
             }
         }
-//        release {
-//            // 混淆
-//            minifyEnabled true
-//            // Zipalign优化
-//            zipAlignEnabled true
-//            // 移除无用的resource文件
-//            shrinkResources true
-//            // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-////            signingConfig signingConfigs.release
-//            manifestPlaceholders = [
-//                    APP_NAME      : "@string/app_name",
-//                    APPLICATION_ID: cfg.applicationId,
-//                    MAP_KEY       : MAP_KEY
-//            ]
-//
-//            //设置release版本只包含armeabi和armeabi-v7a的so包
-//            ndk {
-//                abiFilters "armeabi"
-//            }
-//
-//        }
+        release {
+
+            // 混淆
+            minifyEnabled true
+            // Zipalign优化
+            zipAlignEnabled true
+                // 移除无用的resource文件
+                shrinkResources true
+            // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+            manifestPlaceholders = [
+                    APP_NAME      : "@string/app_name",
+                    APPLICATION_ID: cfg.applicationId,
+                    MAP_KEY       : MAP_KEY
+            ]
+
+            //设置release版本只包含armeabi和armeabi-v7a的so包
+            ndk {
+                abiFilters "armeabi"
+            }
+
+        }
 
     }
+
+    productFlavors {
+        prod {
+
+            //是否输出日志
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "String", "ServerName", '"正式服务器"'
+            //url动态替换,正式url
+            buildConfigField "String", "API_HOST", "${API_RELEASE_HOST}"
+        }
+
+        stage {
+
+            //是否输出日志
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "String", "ServerName", '"阿里云服务器"'
+            //url动态替换,正式url
+            buildConfigField "String", "API_HOST", "${API_BETA_HOST}"
+        }
+
+        dev {
+
+            //是否输出日志
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "String", "ServerName", '"内部云服务器"'
+            //url动态替换,正式url
+            buildConfigField "String", "API_HOST", "${API_DEBUG_HOST}"
+        }
+    }
+
 
     // 输出文件配置，渠道包是这种格式的：app-{版本号}-{渠道名称}.apk
     applicationVariants.all { variant ->
