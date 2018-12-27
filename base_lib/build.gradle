@@ -57,5 +57,5 @@ dependencies {
     //activity 滑动返回      https://github.com/r0adkll/Slidr
     implementation "com.r0adkll:slidableactivity:${libs.slidableactivity}"
     //https://github.com/li-xiaojun/XPopup
-    implementation 'com.lxj:xpopup:latest release'
+    implementation 'com.lxj:xpopup:1.0.3'
 }
