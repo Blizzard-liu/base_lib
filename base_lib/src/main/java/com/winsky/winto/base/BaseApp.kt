@@ -29,7 +29,7 @@ class BaseApp: Application(){
             //设置全局的Header构建器
             SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
                 //全局设置主题颜色
-                //                layout.setPrimaryColorsId(R.color.refresh_bg_color);
+                //                rootView.setPrimaryColorsId(R.color.refresh_bg_color);
                 //                 内容不偏移:
                 //                mRefreshLayout.setEnableHeaderTranslationContent(false);
                 //                内容跟随偏移:

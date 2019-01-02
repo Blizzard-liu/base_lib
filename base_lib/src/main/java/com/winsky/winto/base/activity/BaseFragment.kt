@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import cn.winsky.travel.airporttravel.utils.LogUtils
 import cn.winsky.travel.airporttravel.view.dialog.LoadingDialog
+import org.greenrobot.eventbus.EventBus
 
 /**
  * <br></br>================================================
@@ -22,7 +23,7 @@ abstract class BaseFragment : Fragment() {
     private var SUB_FRAGMENT = ""
 
     //布局view
-    protected var layout: View? = null
+    protected var rootView: View? = null
     protected var mActivity: FragmentActivity? = null
     private var mLoadingDialog: LoadingDialog? = null
     //Fragment的View加载完毕的标记
@@ -65,9 +66,9 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         LogUtils.w(TAG, "$SUB_FRAGMENT=========================== onCreateView ")
-        layout = inflater.inflate(layoutResId, container, false)
+        rootView = inflater.inflate(layoutResId, container, false)
         //返回一个Unbinder值（进行解绑），注意这里的this不能使用getActivity()
-        return layout
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -104,10 +105,10 @@ abstract class BaseFragment : Fragment() {
         LogUtils.w(TAG, "$SUB_FRAGMENT=========================== onActivityCreated ")
         if (openNewsListening()) {
             //是否开启消息监听
-            //            EventBus.getDefault().register(this);
+            EventBus.getDefault().register(this)
         }
         mActivity = activity
-        initView(layout)
+        initView(rootView)
         initData()
         initListener()
         initSoftInput()
@@ -127,8 +128,8 @@ abstract class BaseFragment : Fragment() {
     private fun initSoftInput() {
 
         if (mActivity == null) return
-        if (layout != null) {
-            layout!!.setOnTouchListener(View.OnTouchListener { _, _ ->
+        if (rootView != null) {
+            rootView!!.setOnTouchListener(View.OnTouchListener { _, _ ->
                 if (null != mActivity!!.currentFocus && mActivity!!.currentFocus!!.windowToken != null) {
                     /**
                      * 点击空白位置 隐藏软键盘
@@ -149,10 +150,13 @@ abstract class BaseFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         LogUtils.w(TAG, "$SUB_FRAGMENT=========================== onDestroyView ")
+        if (null != rootView) {
+            (rootView!!.parent as ViewGroup).removeView(rootView)
+        }
         hideSoftInput()
         if (openNewsListening()) {
             //销毁消息监听
-            //            EventBus.getDefault().unregister(this);
+            EventBus.getDefault().unregister(this)
         }
     }
 

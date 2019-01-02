@@ -33,7 +33,7 @@ import java.util.List;
 
         AdManager adManager = new AdManager(_mActivity, list);
                 adManager.setOverScreen(false)
-                .setContentView((ViewGroup) layout)
+                .setContentView((ViewGroup) rootView)
                 .setOnImageClickListener(new AdManager.OnImageClickListener() {
 @Override
 public void onImageClick(View view, AdInfo advInfo) {
