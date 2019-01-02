@@ -138,6 +138,18 @@ android {
             }
         }
     }
+
+    //解决com.android.support包重复依赖 版本不一致问题
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion "${libs.supportVersion}"
+                }
+            }
+        }
+    }
 }
 
 static def buildTime() {
